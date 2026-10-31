@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kasturvani · Premium Education Platform</title>
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <!-- Google Fonts: Inter + Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ----- RESET & GLOBAL ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background: #f9fbfe;
+      color: #1e293b;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ----- COLORS (navy, blue, white, light grey) ----- */
+    :root {
+      --navy: #0b1e3a;
+      --blue: #2563eb;
+      --blue-light: #3b82f6;
+      --blue-soft: #dbeafe;
+      --grey-light: #f1f5f9;
+      --grey-border: #e2e8f0;
+      --white: #ffffff;
+      --shadow-sm: 0 8px 20px rgba(0, 20, 50, 0.04);
+      --shadow-md: 0 12px 28px rgba(0, 20, 50, 0.08);
+      --radius-card: 20px;
+      --radius-btn: 40px;
+    }
+
+    /* ----- TYPOGRAPHY & BUTTONS ----- */
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', 'Inter', sans-serif;
+      font-weight: 600;
+      color: var(--navy);
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: 3.2rem;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+    }
+
+    h3 {
+      font-size: 1.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: var(--radius-btn);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--grey-border);
+      color: var(--navy);
+    }
+
+    .btn-outline:hover {
+      background: var(--grey-light);
+      border-color: var(--blue);
+    }
+
+    .btn-soft {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .btn-soft:hover {
+      background: #cdddfd;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 4px 14px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* ----- HEADER / NAVIGATION ----- */
+    .navbar {
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+      padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.7rem;
+      font-family: 'Poppins', sans-serif;
+      color: var(--navy);
+    }
+
+    .logo i {
+      color: var(--blue);
+      font-size: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-weight: 500;
+      color: #1e2b3c;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-auth {
+      display: flex;
+      gap: 12px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.6rem;
+      background: none;
+      border: none;
+      color: var(--navy);
+    }
+
+    /* ----- HERO SECTION ----- */
+    .hero {
+      padding: 60px 0 40px;
+    }
+
+    .hero-grid {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .hero-content {
+      flex: 1.2;
+    }
+
+    .hero-content h1 span {
+      color: var(--blue);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #475569;
+      margin: 24px 0 28px;
+      max-width: 550px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+
+    .search-bar {
+      display: flex;
+      background: white;
+      border-radius: 60px;
+      box-shadow: var(--shadow-md);
+      max-width: 540px;
+      padding: 6px 6px 6px 24px;
+      align-items: center;
+      border: 1px solid #eef2f6;
+    }
+
+    .search-bar i {
+      color: #94a3b8;
+      font-size: 1.1rem;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 14px 16px;
+      font-size: 1rem;
+      width: 100%;
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .search-bar button {
+      background: var(--blue);
+      border: none;
+      border-radius: 50px;
+      padding: 14px 28px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      white-space: nowrap;
+    }
+
+    .hero-visual {
+      flex: 0.9;
+      background: linear-gradient(145deg, #eef4ff, #ffffff);
+      border-radius: 40px;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-visual img {
+      width: 100%;
+      max-width: 400px;
+      border-radius: 30px;
+      object-fit: cover;
+      aspect-ratio: 1/1;
+      background: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-weight: 500;
+      font-size: 1rem;
+      /* placeholder illustration */
+    }
+
+    /* ----- FEATURED TEACHERS (HORIZONTAL CARDS) ----- */
+    .section {
+      padding: 60px 0;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .section-header h2 {
+      font-size: 1.9rem;
+      margin-bottom: 0;
+    }
+
+    .teacher-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 28px;
+    }
+
+    .teacher-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s ease;
+      border: 1px solid #f0f3f8;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .teacher-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+    }
+
+    .teacher-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: #d9e6ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 2.2rem;
+      color: var(--blue);
+    }
+
+    .teacher-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .verified-badge {
+      color: var(--blue);
+      font-size: 0.9rem;
+      background: #e6efff;
+      padding: 4px 8px;
+      border-radius: 30px;
+    }
+
+    .teacher-meta {
+      color: #475569;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .teacher-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 10px 0;
+    }
+
+    .subject-tag {
+      background: var(--grey-light);
+      padding: 4px 12px;
+      border-radius: 30px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--navy);
+    }
+
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      margin: 8px 0;
+      color: #1e293b;
+    }
+
+    .rating i {
+      color: #fbbf24;
+    }
+
+    .fee {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--navy);
+      margin: 10px 0 6px;
+    }
+
+    .fee small {
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+
+    .slots {
+      font-size: 0.9rem;
+      color: #475569;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .teacher-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .teacher-actions .btn {
+      padding: 10px 16px;
+      font-size: 0.85rem;
+      flex: 1;
+    }
+
+    /* ----- COUNSELLING TYPES ----- */
+    .counselling-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .counselling-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 28px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #f0f3f8;
+      transition: 0.2s;
+    }
+
+    .counselling-card i {
+      font-size: 2.6rem;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .counselling-card h4 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+
+    .counselling-card p {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    /* ----- DASHBOARD PREVIEWS (STUDENT/TEACHER/ADMIN) ----- */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .dash-card {
+      background: white;
+      border-radius: var(--radius-card);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--grey-border);
+    }
+
+    .dash-card h3 {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .dash-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .dash-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #e2e8f0;
+    }
+
+    .dash-item:last-child {
+      border-bottom: none;
+    }
+
+    .status {
+      font-weight: 600;
+      color: var(--blue);
+    }
+
+    /* ----- BOOKING STEPS (PREVIEW) ----- */
+    .booking-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      background: white;
+      border-radius: 60px;
+      padding: 10px 18px;
+      margin-top: 20px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--grey-border);
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 500;
+      color: #334155;
+    }
+
+    .step span {
+      width: 28px;
+      height: 28px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    /* ----- CONTACT & SUPPORT ----- */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      background: white;
+      border-radius: 40px;
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid #edf2f7;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 20px;
+      border: 1px solid var(--grey-border);
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 16px;
+      background: #fafcff;
+    }
+
+    .contact-form button {
+      width: 100%;
+    }
+
+    .support-badges i {
+      color: var(--blue);
+      margin-right: 8px;
+    }
+
+    .support-badges div {
+      margin-bottom: 12px;
+    }
+
+    /* ----- FOOTER ----- */
+    footer {
+      background: var(--navy);
+      color: #b9c7db;
+      padding: 50px 0 24px;
+      margin-top: 60px;
+      border-radius: 40px 40px 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 40px;
+    }
+
+    .footer-grid h4 {
+      color: white;
+      margin-bottom: 18px;
+      font-size: 1.1rem;
+    }
+
+    .footer-grid ul li {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .footer-grid ul li:hover {
+      color: white;
+      cursor: pointer;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #1e3552;
+      margin-top: 40px;
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+
+    /* ----- RESPONSIVE ----- */
+    @media (max-width: 1024px) {
+      h1 { font-size: 2.6rem; }
+      .hero-grid { flex-direction: column; }
+      .counselling-grid { grid-template-columns: repeat(2, 1fr); }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .contact-wrap { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .mobile-menu-btn { display: block; }
+      .nav-auth .btn-outline { display: none; }
+      h1 { font-size: 2.2rem; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .counselling-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .teacher-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; }
+      .search-bar { flex-direction: column; padding: 16px; border-radius: 30px; }
+      .search-bar input { width: 100%; }
+      .search-bar button { width: 100%; }
+    }
+
+    /* animations */
+    .fade-up {
+      animation: fadeUp 0.6s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ================= NAVBAR ================= -->
+<header class="navbar">
+  <div class="container nav-container">
+    <div class="logo">
+      <i class="fas fa-graduation-cap"></i>
+      <span>Kasturvani</span>
+    </div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#find-teachers">Find Teachers</a>
+      <a href="#book-counselling">Book Counselling</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-auth">
+      <a href="#" class="btn btn-outline">Login</a>
+      <a href="#" class="btn btn-primary">Sign Up</a>
+    </div>
+    <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero container">
+  <div class="hero-grid">
+    <div class="hero-content fade-up">
+      <h1>Your Future Starts <br>With the <span>Right Guidance.</span></h1>
+      <p>Connect with verified teachers, book 1-on-1 counselling, and get personalised academic & career mentorship — all in one premium platform.</p>
+      <div class="hero-buttons">
+        <a href="#book-counselling" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book a Counselling Session</a>
+        <a href="#find-teachers" class="btn btn-outline"><i class="fas fa-chalkboard-teacher"></i> Explore Teachers</a>
+      </div>
+      <div class="search-bar">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search by subject, expertise or teacher name…" />
+        <button>Search</button>
+      </div>
+    </div>
+    <div class="hero-visual fade-up">
+      <div class="hero-visual img" style="background: linear-gradient(145deg, #dbeafe, #eff6ff); display:flex; flex-direction:column; align-items:center; justify-content:center; color:#1e3a8a; width:100%; border-radius:30px; min-height:280px;">
+        <i class="fas fa-user-graduate" style="font-size:5rem; color:#2563eb;"></i>
+        <p style="font-weight:600; margin-top:16px;">1:1 mentorship</p>
+        <p style="font-size:0.9rem; color:#3b5f9e;">500+ verified teachers</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FIND TEACHERS ================= -->
+<section id="find-teachers" class="section container">
+  <div class="section-header">
+    <h2>Featured Teachers</h2>
+    <a href="#" class="btn btn-soft">View all <i class="fas fa-arrow-right"></i></a>
+  </div>
+  <div class="teacher-grid">
+    <!-- Teacher 1 -->
+    <div class="teacher-card">
+      <div class="teacher-avatar"><i class="fas fa-user-tie"></i></div>
+      <h3>Dr. Ananya Sharma <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h3>
+      <div class="teacher-meta"><i class="fas fa-graduation-cap"></i> Ph.D. Mathematics, 12+ yrs</div>
+      <div class="teacher-subjects">
+        <span class="subject-tag">Mathematics</span>
+        <span class="subject-tag">Statistics</span>
+      </div>
+      <div class="rating"><i class="fas fa-star"></i> 4.9 <span style="color:#64748b; font-weight:400;">(128 reviews)</span></div>
+      <div class="fee">₹ 1,200 <small>/ session</small></div>
+      <div class="slots"><i class="far fa-clock"></i> Today: 4:00 PM, 6:00 PM</div>
+      <div class="teacher-actions">
+        <a href="#" class="btn btn-outline">Profile</a>
+        <a href="#book-counselling" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+    <!-- Teacher 2 -->
+    <div class="teacher-card">
+      <div class="teacher-avatar"><i class="fas fa-user-graduate"></i></div>
+      <h3>Rohan Mehta <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h3>
+      <div class="teacher-meta"><i class="fas fa-graduation-cap"></i> M.Sc. Physics, 8+ yrs</div>
+      <div class="teacher-subjects">
+        <span class="subject-tag">Physics</span>
+        <span class="subject-tag">JEE/NEET</span>
+      </div>
+      <div class="rating"><i class="fas fa-star"></i> 4.8 <span style="color:#64748b; font-weight:400;">(94 reviews)</span></div>
+      <div class="fee">₹ 900 <small>/ session</small></div>
+      <div class="slots"><i class="far fa-clock"></i> Tomorrow: 10:00 AM, 2:00 PM</div>
+      <div class="teacher-actions">
+        <a href="#" class="btn btn-outline">Profile</a>
+        <a href="#book-counselling" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+    <!-- Teacher 3 -->
+    <div class="teacher-card">
+      <div class="teacher-avatar"><i class="fas fa-user-nurse"></i></div>
+      <h3>Priya Nair <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span></h3>
+      <div class="teacher-meta"><i class="fas fa-graduation-cap"></i> M.A. Psychology, 10+ yrs</div>
+      <div class="teacher-subjects">
+        <span class="subject-tag">Career</span>
+        <span class="subject-tag">Mentorship</span>
+      </div>
+      <div class="rating"><i class="fas fa-star"></i> 5.0 <span style="color:#64748b; font-weight:400;">(203 reviews)</span></div>
+      <div class="fee">₹ 1,500 <small>/ session</small></div>
+      <div class="slots"><i class="far fa-clock"></i> Today: 5:30 PM, 7:00 PM</div>
+      <div class="teacher-actions">
+        <a href="#" class="btn btn-outline">Profile</a>
+        <a href="#book-counselling" class="btn btn-primary">Book Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= COUNSELLING TYPES ================= -->
+<section class="section container">
+  <h2 style="text-align:center; margin-bottom:8px;">Counselling Types</h2>
+  <p style="text-align:center; color:#475569; margin-bottom:40px;">Choose the guidance that fits your journey.</p>
+  <div class="counselling-grid">
+    <div class="counselling-card"><i class="fas fa-book-open"></i><h4>Academic Counselling</h4><p>Study plans, subject improvement & academic strategy.</p></div>
+    <div class="counselling-card"><i class="fas fa-briefcase"></i><h4>Career Counselling</h4><p>Career paths, future opportunities & industry insights.</p></div>
+    <div class="counselling-card"><i class="fas fa-pen-fancy"></i><h4>Exam Preparation</h4><p>Exam strategies, time management & mock analysis.</p></div>
+    <div class="counselling-card"><i class="fas fa-hand-holding-heart"></i><h4>Personal Mentorship</h4><p>Individual guidance, motivation & life skills.</p></div>
+  </div>
+</section>
+
+<!-- ================= BOOKING PREVIEW ================= -->
+<section id="book-counselling" class="section container">
+  <div style="background: white; border-radius: 40px; padding: 40px; box-shadow: var(--shadow-sm);">
+    <h2 style="margin-bottom:12px;">Book a session in 6 easy steps</h2>
+    <div class="booking-steps">
+      <div class="step"><span>1</span> Select teacher</div>
+      <div class="step"><span>2</span> Counselling type</div>
+      <div class="step"><span>3</span> Date & time</div>
+      <div class="step"><span>4</span> Student details</div>
+      <div class="step"><span>5</span> Online/Offline</div>
+      <div class="step"><span>6</span> Payment & confirm</div>
+    </div>
+    <div style="margin-top: 32px; display: flex; gap: 16px; flex-wrap: wrap;">
+      <a href="#" class="btn btn-primary">Proceed to Booking <i class="fas fa-arrow-right"></i></a>
+      <a href="#" class="btn btn-outline">View availability calendar</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DASHBOARD PREVIEWS ================= -->
+<section class="section container">
+  <h2>One platform, three dashboards</h2>
+  <div class="dashboard-grid">
+    <!-- Student Dashboard -->
+    <div class="dash-card">
+      <h3><i class="fas fa-user-graduate" style="color:var(--blue);"></i> Student Dashboard</h3>
+      <div class="dash-list">
+        <div class="dash-item"><span>Upcoming: Dr. Ananya</span><span class="status">Today 4 PM</span></div>
+        <div class="dash-item"><span>Previous session</span><span>Rohan Mehta</span></div>
+        <div class="dash-item"><span>Message teacher</span><span><i class="fas fa-comment"></i></span></div>
+        <div class="dash-item"><span>Download receipt</span><span><i class="fas fa-download"></i></span></div>
+      </div>
+    </div>
+    <!-- Teacher Dashboard -->
+    <div class="dash-card">
+      <h3><i class="fas fa-chalkboard-teacher" style="color:var(--blue);"></i> Teacher Dashboard</h3>
+      <div class="dash-list">
+        <div class="dash-item"><span>Set availability</span><span><i class="fas fa-calendar-plus"></i></span></div>
+        <div class="dash-item"><span>Pending booking</span><span class="status">2 requests</span></div>
+        <div class="dash-item"><span>Earnings (Oct)</span><span>₹ 18,400</span></div>
+        <div class="dash-item"><span>Reviews</span><span>4.9 ★</span></div>
+      </div>
+    </div>
+    <!-- Admin Dashboard -->
+    <div class="dash-card">
+      <h3><i class="fas fa-shield-alt" style="color:var(--blue);"></i> Admin Dashboard</h3>
+      <div class="dash-list">
+        <div class="dash-item"><span>Verify teachers</span><span>12 pending</span></div>
+        <div class="dash-item"><span>Bookings today</span><span>48</span></div>
+        <div class="dash-item"><span>Payments</span><span>₹ 1.2L</span></div>
+        <div class="dash-item"><span>Complaints</span><span>3 open</span></div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top: 24px; font-size: 0.9rem; color: #475569; text-align: center;"><i class="fas fa-lock"></i> Secure accounts · Verified teachers · Live calendar</p>
+</section>
+
+<!-- ================= CONTACT & SUPPORT ================= -->
+<section id="contact" class="section container">
+  <div class="contact-wrap">
+    <div>
+      <h2 style="font-size: 1.8rem;">Contact & Support</h2>
+      <p style="color: #475569; margin-bottom: 24px;">We’re here to help you at every step.</p>
+      <div class="support-badges">
+        <div><i class="fas fa-envelope"></i> support@kasturvani.com</div>
+        <div><i class="fab fa-whatsapp"></i> +91 98765 43210</div>
+        <div><i class="fas fa-phone-alt"></i> Mon–Sat, 9am – 8pm</div>
+      </div>
+      <p style="margin-top: 20px; font-size: 0.9rem;"><a href="#" style="color: var(--blue);">FAQs</a> · <a href="#" style="color: var(--blue);">Privacy Policy</a> · <a href="#" style="color: var(--blue);">Terms</a></p>
+    </div>
+    <div class="contact-form">
+      <h3 style="margin-bottom: 18px;">Send us a message</h3>
+      <input type="text" placeholder="Full name" />
+      <input type="email" placeholder="Email address" />
+      <textarea rows="3" placeholder="How can we help?"></textarea>
+      <button class="btn btn-primary" style="width:100%;">Submit</button>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo" style="color: white; margin-bottom: 16px;">
+          <i class="fas fa-graduation-cap" style="color: #60a5fa;"></i>
+          <span>Kasturvani</span>
+        </div>
+        <p style="font-size: 0.95rem; line-height: 1.7; color: #b9c7db;">Premium educational guidance platform. Connect with verified teachers and mentors for academic, career and personal growth.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul>
+          <li>Find Teachers</li>
+          <li>Book Counselling</li>
+          <li>Pricing</li>
+          <li>Become a Teacher</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li>Contact Us</li>
+          <li>FAQs</li>
+          <li>Privacy Policy</li>
+          <li>Terms & Conditions</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Payment & Security</h4>
+        <p style="font-size:0.9rem; margin-bottom:12px;"><i class="fas fa-shield-alt"></i> UPI · Google Pay · PhonePe · Cards</p>
+        <p style="font-size:0.9rem;"><i class="fas fa-lock"></i> 100% secure payments</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Kasturvani. All rights reserved.</span>
+      <span>Made with <i class="fas fa-heart" style="color: #f87171;"></i> for learners</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
